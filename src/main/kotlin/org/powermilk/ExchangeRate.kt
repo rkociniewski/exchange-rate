@@ -9,6 +9,7 @@ import java.io.FileNotFoundException
 import java.io.FileReader
 import java.io.InputStreamReader
 import java.net.MalformedURLException
+import java.net.URI
 import java.net.URL
 import kotlin.io.path.Path
 import kotlin.io.path.exists
@@ -60,7 +61,7 @@ class ExchangeRate(urlOrFilePath: String = "http://api.nbp.pl/api/exchangerates/
     private fun String.createExchangeData(): ExchangeData {
         val urlRegex = "^(https?|ftp|file)://[-a-zA-Z0-9+&@#/%?=~_|!:,.;]*[-a-zA-Z0-9+&@#/%=~_|]".toRegex()
         val reader = when {
-            urlRegex.matches(this) -> InputStreamReader(URL(this).openStream())
+            urlRegex.matches(this) -> InputStreamReader(URI(this).toURL().openStream())
             this.contains(':') -> throw MalformedURLException("$this isn't valid URL")
             Path(this).exists() -> FileReader(File(this))
             else -> throw FileNotFoundException("File $this not found")

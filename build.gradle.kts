@@ -3,7 +3,7 @@ import org.gradle.internal.logging.text.StyledTextOutput
 import org.gradle.internal.logging.text.StyledTextOutputFactory
 import org.gradle.kotlin.dsl.support.serviceOf
 import java.io.ByteArrayOutputStream
-import java.util.*
+import java.net.URL
 
 /**
  * artifact group
@@ -13,7 +13,7 @@ group = "org.powermilk"
 /**
  * project version
  */
-version = "1.1.0"
+version = "1.2.0"
 
 /**
  * project description
@@ -23,12 +23,12 @@ description = "Application shows minimal and maximal value for exchange rate of 
 /**
  * Java source compatibility
  */
-java.sourceCompatibility = JavaVersion.VERSION_17
+java.sourceCompatibility = JavaVersion.VERSION_21
 
 /**
  * Java target compatibility
  */
-java.targetCompatibility = JavaVersion.VERSION_17
+java.targetCompatibility = JavaVersion.VERSION_21
 
 /**
  * detekt plugin version
@@ -113,8 +113,8 @@ sourceSets {
 
 // detekt configuration
 detekt {
-    source = files("src/main/kotlin")
-    config = files("$projectDir/detekt.yml")
+    source.setFrom("src/main/kotlin")
+    config.setFrom("$projectDir/detekt.yml")
     autoCorrect = true
 }
 
@@ -154,7 +154,7 @@ testlogger {
      */
     showSimpleNames = true
     /**
-     * should show passed tests?
+     * should show pass tests?
      */
     showPassed = true
     /**
@@ -204,7 +204,7 @@ tasks {
             /**
              * target version of the generated JVM bytecode
              */
-            jvmTarget = "11"
+            jvmTarget = java.targetCompatibility.toString()
             /**
              * A list of additional compiler arguments
              */
@@ -238,7 +238,7 @@ tasks {
             sarif.required.set(false)
 
             html.required.set(true)
-            html.outputLocation.set(file("$buildDir/reports/detekt/detekt.html"))
+            html.outputLocation.set(file("${layout.buildDirectory}/reports/detekt/detekt.html"))
 
         }
     }
@@ -248,7 +248,7 @@ tasks {
         /**
          * output directory of dokka documentation.
          */
-        outputDirectory.set(buildDir.resolve("dokka"))
+        outputDirectory.set(layout.buildDirectory.dir("dokka"))
         /**
          * source set configuration.
          */
@@ -282,15 +282,16 @@ tasks {
     }
 }
 
+
 /**
  * Function extension to create URL from [String]
  */
-fun url(path: String) = uri(path).toURL()
+fun url(path: String): URL = uri(path).toURL()
 
 /**
  * Function extension to log output in specified style.
  */
-fun StyledTextOutput.color(any: Any, style: StyledTextOutput.Style) = style(style).println(any.toString())
+fun StyledTextOutput.color(any: Any, style: StyledTextOutput.Style): StyledTextOutput = style(style).println(any.toString())
 
 /**
  * Function extension to log info level output in specified style.

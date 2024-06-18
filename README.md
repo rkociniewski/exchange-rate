@@ -11,13 +11,13 @@ GBP from the last 10 days is taken from API of NBP (National Bank of Poland).
 
 First, you need to ensure you have these applications:
 
-- [GIT](https://git-scm.com/) - GIT isn't necessary, but is better to have installed
-- IDE (I prefer [Intellij Idea](https://www.jetbrains.com/idea/)) - It isn't necessary, but in IDE you can lookup code
+- [GIT](https://git-scm.com/) — GIT isn't necessary, but is better to have installed
+- IDE (I prefer [IntelliJ IDEA](https://www.jetbrains.com/idea/)) — It isn't necessary, but in IDE you can look up code
   quicker and nicer.
-- [Gradle](https://gradle.org/) - necessary to build project, sometimes IDE have it pre-installed.
-- [Java JDK 11](https://www.oracle.com/java/technologies/downloads/#java11) - This one is mandatory ;)
+- [Gradle](https://gradle.org/) - necessary to build a project, sometimes IDE have it pre-installed.
+- [Java JDK](https://www.oracle.com/java/technologies/downloads/#java11) - This one is mandatory ;)
 
-You can download project in two ways:
+You can download a project in two ways:
 
 - By GIT, typing in console this command:
 
@@ -25,7 +25,7 @@ You can download project in two ways:
 git clone git@gitlab.com:powermilk-default/exchange-rate.git
  ```
 
-If you decide using this one, I assume you know a basics of GIT
+If you decide to use this one, I assume you know the basics of GIT
 
 - By download ZIP file. You need to just
   download [this file](https://gitlab.com/powermilk-default/exchange-rate/-/archive/master/exchange-rate-master.zip).
@@ -37,9 +37,9 @@ imported, but for your information I listed what technologies are used in this r
 
 Code:
 
-- [Java 11](https://www.java.com/pl/download/) - If you want to develop this application you will
-  need [JDK](https://www.oracle.com/java/technologies/downloads/#java11). Java is programming language what I used to
-  write this program.
+- [Java JDK](https://www.java.com/pl/download/) - If you want to develop this application, you will
+  need [JDK](https://www.oracle.com/java/technologies/downloads/#java11).
+  Java is a programming language what I used to write this program.
 - [Gson](https://github.com/google/gson) - A serialization or deserialization library to convert POJOs into JSON and
   back from Google.
 
@@ -49,7 +49,7 @@ Testing
 
 ## Running application
 
-This application just presents solution of some issue, and it can be run itself. It doesn't have `main()` method.
+This application just presents a solution to some issue, and it can be run itself. It doesn't have `main()` method.
 
 ## Running the tests
 
@@ -62,11 +62,6 @@ gradle test
 ## Built With
 
 * [Gradle](https://gradle.org/) - Dependency Management
-
-## Contributing
-
-Please read [CONTRIBUTING.md](CONTRIBUTING.md)
-code of conduct, and the process for submitting pull requests to us.
 
 ## Versioning
 

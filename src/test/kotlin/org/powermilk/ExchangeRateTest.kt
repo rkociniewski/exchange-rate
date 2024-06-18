@@ -47,10 +47,10 @@ internal class ExchangeRateTest {
     }
 
     @Test
-    fun `should return maximum value`() = assertEquals(4.7387, exchangeRate.getMax())
+    fun `should return maximum value`() = assertEquals(5.1857, exchangeRate.getMax())
 
     @Test
-    fun `should return minimum value`() = assertEquals(4.6663, exchangeRate.getMin())
+    fun `should return minimum value`() = assertEquals(5.0371, exchangeRate.getMin())
 
     private fun messageProvider() = listOf(
         Arguments.of(true, "The maximum value couldn't be obtained"),

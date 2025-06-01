@@ -1,76 +1,92 @@
-# ExchangeRate
-
+# 💱 ExchangeRate – NBP JSON Parser
 [![version](https://img.shields.io/badge/version-1.0.6-yellow.svg)](https://semver.org)
 [![Awesome Kotlin Badge](https://kotlin.link/awesome-kotlin.svg)](https://github.com/KotlinBy/awesome-kotlin)
-[![Build](https://github.com/rkociniewski/exchange-rate/actions/workflows/build.yml/badge.svg)](https://github.com/your-username/exchange-rate/actions/workflows/build.yml)
-[![codecov](https://codecov.io/gh/rkociniewski/exchange-rate/branch/main/graph/badge.svg)](https://codecov.io/gh/your-username/exchange-rate)
+[![Build](https://github.com/rkociniewski/exchange-rate/actions/workflows/main.yml/badge.svg)](https://github.com/rkociniewski/exchange-rate/actions/workflows/main.yml)
+[![codecov](https://codecov.io/gh/rkociniewski/exchange-rate/branch/main/graph/badge.svg)](https://codecov.io/gh/rkociniewski/exchange-rate)
 [![Kotlin](https://img.shields.io/badge/Kotlin-2.1.21-blueviolet?logo=kotlin)](https://kotlinlang.org/)
 [![Gradle](https://img.shields.io/badge/Gradle-8.14.1-blue?logo=gradle)](https://gradle.org/)
 [![License: MIT](https://img.shields.io/badge/License-MIT-greem.svg)](https://opensource.org/licenses/MIT)
 
-The application displays the maximum and minimum value from the exchange rate. By default, the exchange rate from EUR to
-GBP from the last 10 days is taken from API of NBP (National Bank of Poland).
+A simple Kotlin library for parsing and analyzing currency exchange rates from the **National Bank of Poland (NBP)** API. It supports both URLs and local JSON files formatted according to NBP’s API.
 
-## Getting started
+---
 
-First, you need to ensure you have these applications:
+## 🚀 Quick Start
 
-- [GIT](https://git-scm.com/) — GIT isn't necessary, but is better to have installed
-- IDE (I prefer [IntelliJ IDEA](https://www.jetbrains.com/idea/)) — It isn't necessary, but in IDE you can look up code
-  quicker and nicer.
-- [Gradle](https://gradle.org/) - necessary to build a project, sometimes IDE have it pre-installed.
-- [Java JDK](https://www.oracle.com/java/technologies/downloads/#java11) - This one is mandatory ;)
+```kotlin
+val rate = ExchangeRate("http://api.nbp.pl/api/exchangerates/rates/a/eur/last/10/?format=json")
+println("Min: ${rate.getMin()}")
+println("Max: ${rate.getMax()}")
+````
 
-You can download a project in two ways:
+You can also use a local file:
 
-- By GIT, typing in console this command:
-
- ```
-git clone git@gitlab.com:powermilk-default/exchange-rate.git
- ```
-
-If you decide to use this one, I assume you know the basics of GIT
-
-- By download ZIP file. You need to just
-  download [this file](https://gitlab.com/powermilk-default/exchange-rate/-/archive/master/exchange-rate-master.zip).
-
-## Prerequisites
-
-You can build this project with [Gradle](https://gradle.org/), so dependencies are automatically downloaded and
-imported, but for your information I listed what technologies are used in this repository:
-
-Code:
-
-- [Java JDK](https://www.java.com/pl/download/) - If you want to develop this application, you will
-  need [JDK](https://www.oracle.com/java/technologies/downloads/#java11).
-  Java is a programming language what I used to write this program.
-- [Gson](https://github.com/google/gson) - A serialization or deserialization library to convert POJOs into JSON and
-  back from Google.
-
-Testing
-
-- [JUnit 5](https://junit.org/junit5) - The testing Framework.
-
-## Running application
-
-This application just presents a solution to some issue, and it can be run itself. It doesn't have `main()` method.
-
-## Running the tests
-
-I used Gradle, so you can run test with this command:
-
-```
-gradle test
+```kotlin
+val rate = ExchangeRate("src/test/resources/exchangeRate.json")
 ```
 
-## Built With
+---
 
-* [Gradle](https://gradle.org/) - Dependency Management
+## 📄 Expected JSON Structure
 
-## Versioning
+```json
+{
+  "rates": [
+    { "mid": 4.5371 },
+    { "mid": 4.6123 }
+  ]
+}
+```
 
-We use [SemVer](http://semver.org/) for versioning.
+---
 
-## Authors
+## 📦 Features
 
-* **Rafał Kociniewski** - [PowerMilk](https://gitlab.com/rafal.kociniewski)
+* Fetch exchange rate data from URL or file
+* Jackson-based JSON deserialization
+* Extract minimum and maximum average rates (`mid`)
+* Handles edge cases like missing or malformed data
+
+---
+
+## ✅ Tests
+
+Run tests with:
+
+```bash
+./gradlew test
+```
+
+Test coverage includes:
+
+* Valid data (min/max)
+* Empty or malformed JSON
+* Missing fields
+* Invalid URLs and missing files
+* Edge cases like single-element or extreme values
+
+---
+
+## 🔧 Technologies
+
+* Kotlin 2.1.21
+* Jackson (Kotlin module)
+* JUnit 5
+
+---
+
+## 📁 Project Structure
+
+```
+├── src/
+│   ├── main/
+│   │   └── kotlin/rk/powermilk/ExchangeRate.kt
+│   └── test/
+│       └── kotlin/ek/powermilk/ExchangeRateTest.kt
+```
+
+---
+
+## 📜 License
+
+This project is licensed under the MIT License.

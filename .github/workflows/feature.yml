@@ -1,0 +1,13 @@
+name: Feature Branch Build
+
+on:
+  push:
+    branches:
+      - 'feature/**'
+
+jobs:
+  build:
+    uses: ./.github/workflows/build.yml
+    with:
+      run_tests: false
+      build_release: false

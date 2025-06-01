@@ -1,7 +1,11 @@
 # ExchangeRate
 
-[![version](https://img.shields.io/badge/version-1.1.0-yellow.svg)](https://semver.org)
+[![version](https://img.shields.io/badge/version-1.0.6-yellow.svg)](https://semver.org)
 [![Awesome Kotlin Badge](https://kotlin.link/awesome-kotlin.svg)](https://github.com/KotlinBy/awesome-kotlin)
+[![Build](https://github.com/rkociniewski/exchange-rate/actions/workflows/build.yml/badge.svg)](https://github.com/your-username/exchange-rate/actions/workflows/build.yml)
+[![codecov](https://codecov.io/gh/rkociniewski/exchange-rate/branch/main/graph/badge.svg)](https://codecov.io/gh/your-username/exchange-rate)
+[![Kotlin](https://img.shields.io/badge/Kotlin-2.1.21-blueviolet?logo=kotlin)](https://kotlinlang.org/)
+[![Gradle](https://img.shields.io/badge/Gradle-8.14.1-blue?logo=gradle)](https://gradle.org/)
 [![License: MIT](https://img.shields.io/badge/License-MIT-greem.svg)](https://opensource.org/licenses/MIT)
 
 The application displays the maximum and minimum value from the exchange rate. By default, the exchange rate from EUR to

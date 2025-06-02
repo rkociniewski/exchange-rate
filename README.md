@@ -87,6 +87,18 @@ Test coverage includes:
 
 ---
 
-## 📜 License
+## License
 
 This project is licensed under the MIT License.
+
+## Built With
+
+* [Gradle](https://gradle.org/) - Dependency Management
+
+## Versioning
+
+We use [SemVer](http://semver.org/) for versioning.
+
+## Authors
+
+* **Rafał Kociniewski** - [PowerMilk](https://github.com/rkociniewski)

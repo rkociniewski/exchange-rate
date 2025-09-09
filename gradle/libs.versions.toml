@@ -1,11 +1,10 @@
 [versions]
-kotlin = "2.1.21"
+kotlin = "2.2.10"
 test-logger = "4.0.0"
 dokka = "2.0.0"
-manes = "0.52.0"
 detekt = "1.23.8"
-junit = "5.13.0"
-jackson = "2.19.0"
+junit = "5.13.4"
+jackson = "2.19.2"
 
 [libraries]
 detekt = { module = "io.gitlab.arturbosch.detekt:detekt-formatting", version.ref = "detekt" }
@@ -20,5 +19,4 @@ version.ref = "kotlin"
 kotlin-jvm = { id = "org.jetbrains.kotlin.jvm", version.ref = "kotlin" }
 test-logger = { id = "com.adarshr.test-logger", version.ref = "test-logger" }
 dokka = { id = "org.jetbrains.dokka", version.ref = "dokka" }
-manes = { id = "com.github.ben-manes.versions", version.ref = "manes" }
 detekt = { id = "io.gitlab.arturbosch.detekt", version.ref = "detekt" }

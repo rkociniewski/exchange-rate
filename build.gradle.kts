@@ -1,4 +1,3 @@
-import com.github.benmanes.gradle.versions.updates.DependencyUpdatesTask
 import io.gitlab.arturbosch.detekt.Detekt
 import io.gitlab.arturbosch.detekt.DetektCreateBaselineTask
 import org.jetbrains.kotlin.gradle.dsl.JvmTarget
@@ -19,7 +18,6 @@ plugins {
     alias(libs.plugins.kotlin.jvm)
     alias(libs.plugins.test.logger)
     alias(libs.plugins.dokka)
-    alias(libs.plugins.manes)
     alias(libs.plugins.detekt)
     jacoco
 }
@@ -117,12 +115,6 @@ kotlin {
     }
 }
 
-tasks.named<DependencyUpdatesTask>("dependencyUpdates") {
-    rejectVersionIf {
-        isNonStable(candidate.version) && !isNonStable(currentVersion)
-    }
-}
-
 detekt {
     source.setFrom("src/main/kotlin")
     config.setFrom("$projectDir/detekt.yml")
@@ -135,9 +127,4 @@ tasks.withType<Detekt>().configureEach {
 
 tasks.withType<DetektCreateBaselineTask>().configureEach {
     jvmTarget = JvmTarget.JVM_21.target
-}
-
-private fun isNonStable(version: String): Boolean {
-    return listOf("alpha", "beta", "rc", "cr", "m", "preview", "snapshot", "dev")
-        .any { version.lowercase().contains(it) }
 }

@@ -1,10 +1,10 @@
 package rk.powermilk
 
 import com.fasterxml.jackson.annotation.JsonProperty
-import com.fasterxml.jackson.databind.DeserializationFeature
-import com.fasterxml.jackson.databind.ObjectMapper
-import com.fasterxml.jackson.module.kotlin.readValue
-import com.fasterxml.jackson.module.kotlin.registerKotlinModule
+import tools.jackson.databind.DeserializationFeature
+import tools.jackson.databind.json.JsonMapper
+import tools.jackson.module.kotlin.kotlinModule
+import tools.jackson.module.kotlin.readValue
 import java.io.File
 import java.io.FileNotFoundException
 import java.io.FileReader
@@ -24,8 +24,10 @@ class ExchangeRate(urlOrFilePath: String = "http://api.nbp.pl/api/exchangerates/
     /**
      * Jackson ObjectMapper to serialize and deserialize data.
      */
-    private val mapper =
-        ObjectMapper().registerKotlinModule().configure(DeserializationFeature.FAIL_ON_UNKNOWN_PROPERTIES, false)
+    private val mapper = JsonMapper.builder()
+        .addModule(kotlinModule())
+        .disable(DeserializationFeature.FAIL_ON_UNKNOWN_PROPERTIES)
+        .build()
 
     /**
      * ExchangeData object to get proper value of exchange rates.
@@ -56,7 +58,7 @@ class ExchangeRate(urlOrFilePath: String = "http://api.nbp.pl/api/exchangerates/
      * Class representing exchange data.
      */
     data class ExchangeData(
-        @JsonProperty("rates")
+        @param:JsonProperty("rates")
         val rates: List<Rate> = listOf()
     )
 
@@ -64,7 +66,7 @@ class ExchangeRate(urlOrFilePath: String = "http://api.nbp.pl/api/exchangerates/
      * Class with average rate from day.
      */
     data class Rate(
-        @JsonProperty("mid")
+        @param:JsonProperty("mid")
         val mid: Double?
     )
 }

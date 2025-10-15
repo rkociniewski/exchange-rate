@@ -4,6 +4,14 @@ on:
   push:
     branches:
       - develop
+    paths-ignore:
+      - '**.md'
+      - 'docs/**'
+      - '.gitignore'
+
+concurrency:
+  group: develop-${{ github.ref }}
+  cancel-in-progress: true
 
 jobs:
   build:

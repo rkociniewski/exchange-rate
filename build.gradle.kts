@@ -1,5 +1,6 @@
 import io.gitlab.arturbosch.detekt.Detekt
 import io.gitlab.arturbosch.detekt.DetektCreateBaselineTask
+import org.jetbrains.dokka.gradle.engine.parameters.VisibilityModifier
 import org.jetbrains.kotlin.gradle.dsl.JvmTarget
 
 /**
@@ -10,9 +11,10 @@ group = "rk.powermilk"
 /**
  * project version
  */
-version = "1.0.6"
+version = "1.1.0"
 
-val javaVersion = JavaVersion.VERSION_21
+val javaVersion: JavaVersion = JavaVersion.VERSION_21
+val jvmTargetVersion = JvmTarget.JVM_21.target
 
 plugins {
     alias(libs.plugins.kotlin.jvm)
@@ -47,22 +49,46 @@ testlogger {
     showSimpleNames = true
 }
 
+kotlin {
+    compilerOptions {
+        verbose = true // enable verbose logging output
+        jvmTarget.set(JvmTarget.fromTarget(jvmTargetVersion)) // target version of the generated JVM bytecode
+    }
+}
+
+detekt {
+    source.setFrom("src/main/kotlin")
+    config.setFrom("$projectDir/detekt.yml")
+    autoCorrect = true
+}
+
+dokka {
+    dokkaSourceSets.main {
+        jdkVersion.set(java.targetCompatibility.toString().toInt()) // Used for linking to JDK documentation
+        skipDeprecated.set(false)
+    }
+
+    pluginsConfiguration.html {
+        dokkaSourceSets {
+            configureEach {
+                documentedVisibilities.set(
+                    setOf(
+                        VisibilityModifier.Public,
+                        VisibilityModifier.Private,
+                        VisibilityModifier.Protected,
+                        VisibilityModifier.Internal,
+                        VisibilityModifier.Package,
+                    )
+                )
+            }
+        }
+    }
+}
+
 tasks.test {
     jvmArgs("-XX:+EnableDynamicAgentLoading")
     useJUnitPlatform()
     finalizedBy(tasks.jacocoTestReport)
-}
-
-tasks.dokkaHtml {
-    outputDirectory.set(layout.buildDirectory.dir("dokka")) // output directory of dokka documentation.
-    // source set configuration.
-    dokkaSourceSets {
-        named("main") { // source set name.
-            jdkVersion.set(java.targetCompatibility.toString().toInt()) // Used for linking to JDK documentation
-            skipDeprecated.set(false) // Add output to deprecated members. PackageOptions can override applying globally
-            includeNonPublic.set(true) // non-public modifiers should be documented
-        }
-    }
 }
 
 tasks.jacocoTestReport {
@@ -108,23 +134,10 @@ tasks.register("coverage") {
     dependsOn(tasks.test, tasks.jacocoTestReport, tasks.jacocoTestCoverageVerification)
 }
 
-kotlin {
-    compilerOptions {
-        verbose = true // enable verbose logging output
-        jvmTarget.set(JvmTarget.fromTarget(java.targetCompatibility.toString())) // target version of the generated JVM bytecode
-    }
-}
-
-detekt {
-    source.setFrom("src/main/kotlin")
-    config.setFrom("$projectDir/detekt.yml")
-    autoCorrect = true
-}
-
 tasks.withType<Detekt>().configureEach {
-    jvmTarget = JvmTarget.JVM_21.target
+    jvmTarget = jvmTargetVersion
 }
 
 tasks.withType<DetektCreateBaselineTask>().configureEach {
-    jvmTarget = JvmTarget.JVM_21.target
+    jvmTarget = jvmTargetVersion
 }

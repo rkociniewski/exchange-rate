@@ -1,17 +1,16 @@
 package rk.powermilk
 
-import com.fasterxml.jackson.databind.JsonMappingException
-import com.fasterxml.jackson.databind.exc.InvalidFormatException
 import org.junit.jupiter.api.Test
 import org.junit.jupiter.api.TestInstance
-import org.junit.jupiter.api.assertNull
-import org.junit.jupiter.api.assertThrows
 import org.junit.jupiter.params.ParameterizedTest
 import org.junit.jupiter.params.provider.Arguments
 import org.junit.jupiter.params.provider.MethodSource
+import tools.jackson.databind.DatabindException
+import tools.jackson.databind.exc.InvalidFormatException
 import java.io.FileNotFoundException
 import java.net.MalformedURLException
 import kotlin.test.assertEquals
+import kotlin.test.assertFailsWith
 import kotlin.test.assertTrue
 
 @TestInstance(TestInstance.Lifecycle.PER_CLASS)
@@ -21,7 +20,7 @@ internal class ExchangeRateTest {
     @Test
     fun `should throws MalformedURLException`() {
         val badUrl = "htp://api.nbp.pl/api/exchangerates/rates/a/gbp/last/10/?format=json"
-        val exception = assertThrows<MalformedURLException> { ExchangeRate(badUrl) }
+        val exception = assertFailsWith<MalformedURLException> { ExchangeRate(badUrl) }
 
         assertEquals(
             "$badUrl isn't valid URL",
@@ -31,7 +30,7 @@ internal class ExchangeRateTest {
 
     @Test
     fun `should throws FileNotFoundException`() {
-        val exception = assertThrows<FileNotFoundException> {
+        val exception = assertFailsWith<FileNotFoundException> {
             ExchangeRate("NonExist.json")
         }
 
@@ -41,7 +40,7 @@ internal class ExchangeRateTest {
     @ParameterizedTest
     @MethodSource("messageProvider")
     fun `should throw IllegalStateException when rates are empty`(isMax: Boolean, expectedMessage: String) {
-        val exception = assertThrows<IllegalStateException> {
+        val exception = assertFailsWith<IllegalStateException> {
             ExchangeRate(testPath("missingRates.json")).apply {
                 if (isMax) getMax() else getMin()
             }
@@ -58,7 +57,7 @@ internal class ExchangeRateTest {
 
     @Test
     fun `should throw exception for empty rates list`() {
-        val exception = assertThrows<IllegalStateException> {
+        val exception = assertFailsWith<IllegalStateException> {
             ExchangeRate(testPath("emptyRates.json")).getMin()
         }
         assertEquals("The minimum value couldn't be obtained", exception.message)
@@ -66,15 +65,16 @@ internal class ExchangeRateTest {
 
     @Test
     fun `should throw exception for malformed JSON`() {
-        val exception = assertThrows<JsonMappingException> {
+        val exception = assertFailsWith<DatabindException> {
             ExchangeRate(testPath("malformed.json")).getMin()
         }
+
         assertTrue { exception.message?.startsWith("Cannot deserialize value of type") ?: false }
     }
 
     @Test
     fun `should throw IllegalStateException for empty rates`() {
-        val exception = assertThrows<IllegalStateException> {
+        val exception = assertFailsWith<IllegalStateException> {
             ExchangeRate(testPath("emptyRates.json")).getMin()
         }
         assertEquals("The minimum value couldn't be obtained", exception.message)
@@ -82,21 +82,22 @@ internal class ExchangeRateTest {
 
     @Test
     fun `should throw RuntimeException for malformed json`() {
-        assertThrows<InvalidFormatException> {
+        assertFailsWith<InvalidFormatException> {
             ExchangeRate(testPath("malformed.json")).getMin()
         }
     }
 
     @Test
     fun `should throw IllegalStateException for missing mid`() {
-        val exception = assertThrows<IllegalStateException> {
+        val exception = assertFailsWith<IllegalStateException> {
             ExchangeRate(testPath("missingMid.json")).getMin()
         }
         assertEquals("The minimum value couldn't be obtained", exception.message)
     }
+
     @Test
     fun `should throw IllegalStateException for missing rates`() {
-        val exception = assertThrows<IllegalStateException> {
+        val exception = assertFailsWith<IllegalStateException> {
             ExchangeRate(testPath("missingRates.json")).getMax()
         }
         assertEquals("The maximum value couldn't be obtained", exception.message)
@@ -111,7 +112,7 @@ internal class ExchangeRateTest {
 
     @Test
     fun `should throw IllegalStateException for wrong key 'ratez'`() {
-        val exception = assertThrows<IllegalStateException> {
+        val exception = assertFailsWith<IllegalStateException> {
             ExchangeRate(testPath("invalidKey.json")).getMin()
         }
         assertEquals("The minimum value couldn't be obtained", exception.message)
@@ -119,7 +120,7 @@ internal class ExchangeRateTest {
 
     @Test
     fun `should throw FileNotFoundException for non-existent file`() {
-        val exception = assertThrows<FileNotFoundException> {
+        val exception = assertFailsWith<FileNotFoundException> {
             ExchangeRate(testPath("notExist.json"))
         }
         assertEquals("File ${testPath("notExist.json")} not found", exception.message)

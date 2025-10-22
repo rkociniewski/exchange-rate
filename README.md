@@ -1,4 +1,5 @@
 # 💱 ExchangeRate – NBP JSON Parser
+
 [![version](https://img.shields.io/badge/version-1.1.8-yellow.svg)](https://semver.org)
 [![Awesome Kotlin Badge](https://kotlin.link/awesome-kotlin.svg)](https://github.com/KotlinBy/awesome-kotlin)
 [![Build](https://github.com/rkociniewski/exchange-rate/actions/workflows/main.yml/badge.svg)](https://github.com/rkociniewski/exchange-rate/actions/workflows/main.yml)
@@ -7,7 +8,8 @@
 [![Gradle](https://img.shields.io/badge/Gradle-9.10-blue?logo=gradle)](https://gradle.org/)
 [![License: MIT](https://img.shields.io/badge/License-MIT-greem.svg)](https://opensource.org/licenses/MIT)
 
-A simple Kotlin library for parsing and analyzing currency exchange rates from the **National Bank of Poland (NBP)** API. It supports both URLs and local JSON files formatted according to NBP’s API.
+A simple Kotlin library for parsing and analyzing currency exchange rates from the **National Bank of Poland (NBP)**
+API. It supports both URLs and local JSON files formatted according to NBP’s API.
 
 ---
 

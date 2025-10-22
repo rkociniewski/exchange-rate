@@ -1,57 +1,57 @@
 {
-  "table":"A",
-  "currency":"funt szterling",
-  "code":"GBP",
-  "rates":[
-    {
-      "no":"108/A/NBP/2024",
-      "effectiveDate":"2024-06-05",
-      "mid":5.0606
-    },
-    {
-      "no":"109/A/NBP/2024",
-      "effectiveDate":"2024-06-06",
-      "mid":5.0543
-    },
-    {
-      "no":"110/A/NBP/2024",
-      "effectiveDate":"2024-06-07",
-      "mid":5.0371
-    },
-    {
-      "no":"111/A/NBP/2024",
-      "effectiveDate":"2024-06-10",
-      "mid":5.1033
-    },
-    {
-      "no":"112/A/NBP/2024",
-      "effectiveDate":"2024-06-11",
-      "mid":5.1464
-    },
-    {
-      "no":"113/A/NBP/2024",
-      "effectiveDate":"2024-06-12",
-      "mid":5.1465
-    },
-    {
-      "no":"114/A/NBP/2024",
-      "effectiveDate":"2024-06-13",
-      "mid":5.1350
-    },
-    {
-      "no":"115/A/NBP/2024",
-      "effectiveDate":"2024-06-14",
-      "mid":5.1857
-    },
-    {
-      "no":"116/A/NBP/2024",
-      "effectiveDate":"2024-06-17",
-      "mid":5.1616
-    },
-    {
-      "no":"117/A/NBP/2024",
-      "effectiveDate":"2024-06-18",
-      "mid":5.1423
-    }
-  ]
+    "table": "A",
+    "currency": "funt szterling",
+    "code": "GBP",
+    "rates": [
+        {
+            "no": "108/A/NBP/2024",
+            "effectiveDate": "2024-06-05",
+            "mid": 5.0606
+        },
+        {
+            "no": "109/A/NBP/2024",
+            "effectiveDate": "2024-06-06",
+            "mid": 5.0543
+        },
+        {
+            "no": "110/A/NBP/2024",
+            "effectiveDate": "2024-06-07",
+            "mid": 5.0371
+        },
+        {
+            "no": "111/A/NBP/2024",
+            "effectiveDate": "2024-06-10",
+            "mid": 5.1033
+        },
+        {
+            "no": "112/A/NBP/2024",
+            "effectiveDate": "2024-06-11",
+            "mid": 5.1464
+        },
+        {
+            "no": "113/A/NBP/2024",
+            "effectiveDate": "2024-06-12",
+            "mid": 5.1465
+        },
+        {
+            "no": "114/A/NBP/2024",
+            "effectiveDate": "2024-06-13",
+            "mid": 5.1350
+        },
+        {
+            "no": "115/A/NBP/2024",
+            "effectiveDate": "2024-06-14",
+            "mid": 5.1857
+        },
+        {
+            "no": "116/A/NBP/2024",
+            "effectiveDate": "2024-06-17",
+            "mid": 5.1616
+        },
+        {
+            "no": "117/A/NBP/2024",
+            "effectiveDate": "2024-06-18",
+            "mid": 5.1423
+        }
+    ]
 }

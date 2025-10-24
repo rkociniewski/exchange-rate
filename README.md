@@ -1,6 +1,6 @@
 # 💱 ExchangeRate – NBP JSON Parser
 
-[![version](https://img.shields.io/badge/version-1.1.8-yellow.svg)](https://semver.org)
+[![version](https://img.shields.io/badge/version-1.1.12-yellow.svg)](https://semver.org)
 [![Awesome Kotlin Badge](https://kotlin.link/awesome-kotlin.svg)](https://github.com/KotlinBy/awesome-kotlin)
 [![Build](https://github.com/rkociniewski/exchange-rate/actions/workflows/main.yml/badge.svg)](https://github.com/rkociniewski/exchange-rate/actions/workflows/main.yml)
 [![codecov](https://codecov.io/gh/rkociniewski/exchange-rate/branch/main/graph/badge.svg)](https://codecov.io/gh/rkociniewski/exchange-rate)
